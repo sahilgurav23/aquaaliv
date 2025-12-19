@@ -25,9 +25,9 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-slate-900 mb-3">Contact</h4>
           <ul className="space-y-2 text-sm text-slate-700">
-            <li>Phone: <a href="tel:+919999999999" className="hover:underline">+91 99999 99999</a></li>
-            <li>Email: <a href="mailto:care@aquaaliv.com" className="hover:underline">care@aquaaliv.com</a></li>
-            <li>Address: AquaaLiv, Sector 1, Business Park, Your City</li>
+            <li>Phone: <a href="tel:+919689102762" className="hover:underline">+91 96891 02762</a></li>
+            <li>Email: <a href="mailto:aquaaliv@gmail.com" className="hover:underline">aquaaliv@gmail.com</a></li>
+            <li>Address: AquaaLiv, Office No 02, Bhakti-Desai Heights, Near Bank of Maharashtra, Akurdi - 035</li>
           </ul>
         </div>
         <div>

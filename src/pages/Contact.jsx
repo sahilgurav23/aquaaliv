@@ -26,9 +26,9 @@ export default function Contact() {
             <div className="card">
               <h3 className="text-lg font-semibold text-slate-900">Contact Details</h3>
               <ul className="mt-3 space-y-2 text-slate-700 text-sm">
-                <li>Phone: <a className="hover:underline" href="tel:+919999999999">+91 99999 99999</a></li>
-                <li>Email: <a className="hover:underline" href="mailto:care@aquaaliv.com">care@aquaaliv.com</a></li>
-                <li>Address: AquaaLiv, Sector 1, Business Park, Your City</li>
+                <li>Phone: <a className="hover:underline" href="tel:+919689102762">+91 96891 42762</a></li>
+                <li>Email: <a className="hover:underline" href="mailto:aquaaliv@gmail.com">aquaaliv@gmail.com</a></li>
+                <li>Address: AquaaLiv, Office No 02, Bhakti-Desai Heights, Near Bank of Maharashtra, Akurdi - 035 </li>
                 <li>Hours: Mon–Sat, 9:00 AM – 7:00 PM</li>
               </ul>
             </div>

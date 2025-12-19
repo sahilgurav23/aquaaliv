@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>AquaaLiv | Pure Water. Pure Life.</title>
-        <meta name="description" content="AquaaLiv offers RO and UV/UF water purifiers, installation, repair, AMC services, and water testing for homes and businesses." />
+        <meta name="description" content="The Choice of Purity. Pure, refreshing, and naturally sourced. Every drop delivers the essence of freshness. For those who chooses nature's finest. Experience the purity, feel the difference" />
       </Helmet>
       <HeroSection />
 
@@ -57,25 +57,33 @@ export default function Home() {
 
       <section className="container-p py-16">
         <div className="mb-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Why Choose AquaaLiv</h2>
-          <p className="text-slate-600">Reliable service, genuine parts, and superior purification</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">WHY CHOOSE AQUAALIV</h2>
+          <p className="text-slate-600">YOUR TRUSTED PARTNER IN PURE DRINING WATER</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="card">
-            <p className="text-lg font-semibold text-slate-900">Certified Technicians</p>
-            <p className="mt-2 text-sm text-slate-600">Trained professionals with multi-brand expertise.</p>
+            <p className="text-lg font-semibold text-slate-900">FAST AND RELIABLE</p>
+            <p className="mt-2 text-sm text-slate-600">Quick Installations and Doorstep Service Across All Major Cities.</p>
           </div>
           <div className="card">
-            <p className="text-lg font-semibold text-slate-900">Genuine Filters</p>
-            <p className="mt-2 text-sm text-slate-600">Original spares for safe and great-tasting water.</p>
+            <p className="text-lg font-semibold text-slate-900">PURE WATER ASSURANCE</p>
+            <p className="mt-2 text-sm text-slate-600">Our Multi-Stage RO Purification Guarantees 100% Safe Drinkin water.</p>
           </div>
           <div className="card">
-            <p className="text-lg font-semibold text-slate-900">Quick Turnaround</p>
-            <p className="mt-2 text-sm text-slate-600">Fast service with convenient scheduling.</p>
+            <p className="text-lg font-semibold text-slate-900">EXPERT TECHNICIANS</p>
+            <p className="mt-2 text-sm text-slate-600">Certified and Experienced Professionals Handle Everything With Care.</p>
           </div>
           <div className="card">
-            <p className="text-lg font-semibold text-slate-900">Transparent Pricing</p>
-            <p className="mt-2 text-sm text-slate-600">No hidden fees. Clear plans and invoices.</p>
+            <p className="text-lg font-semibold text-slate-900">. 24 / 7 SUPPORT</p>
+            <p className="mt-2 text-sm text-slate-600">We’re Always Available to Solve Issues and Schedule Maintenance.</p>
+          </div>
+          <div className="card">
+            <p className="text-lg font-semibold text-slate-900">CUSTOM PLANS</p>
+            <p className="mt-2 text-sm text-slate-600">We Offer Personalized Service Packages to Meet Your Specific Needs.</p>
+          </div>
+          <div className="card">
+            <p className="text-lg font-semibold text-slate-900">CUSTOMER APPROACH</p>
+            <p className="mt-2 text-sm text-slate-600">Your Satisfaction Is Our Priority and We Improve Based on Your Feedback.</p>
           </div>
         </div>
       </section>

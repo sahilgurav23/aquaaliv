@@ -12,7 +12,7 @@ export default function HeroSection() {
             Pure Water. <span className="text-brand-blue">Pure Life.</span>
           </h1>
           <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-prose">
-            AquaaLiv delivers RO and UV/UF water purifiers, expert installation, repairs, and AMC services for homes and businesses. Healthy, safe, and great-tasting water—every day.
+            Pure, healthy, and great-tasting water solutions for homes and businesses. Installation, repair, AMC, and expert guidance.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link to="/contact" className="btn-primary">Book Free Water Check</Link>
