@@ -34,8 +34,17 @@ export default function Contact() {
             </div>
             <div className="card">
               <h3 className="text-lg font-semibold text-slate-900">Location</h3>
-              <div className="mt-3 h-64 w-full rounded-xl bg-slate-100 grid place-items-center text-slate-500 text-sm">
-                Google Map placeholder
+              <div className="mt-3 rounded-xl overflow-hidden">
+                <div className="aspect-[4/3] sm:aspect-[16/9] w-full">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1890.1357851602702!2d73.78094344907674!3d18.651805682144744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b98ab095146b%3A0xea72838264435b8d!2sAquaaLiv%20Water%20Solution!5e0!3m2!1sen!2sin!4v1766249965364!5m2!1sen!2sin"
+                    title="AquaaLiv Water Solution location map"
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full border-0"
+                  />
+                </div>
               </div>
             </div>
             <a
