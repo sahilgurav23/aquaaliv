@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import logo from '../assets/aquaaliv_logo.png'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -16,11 +17,10 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
       <div className="container-p h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-green text-white font-bold">A</span>
-            <span className="sr-only">AquaaLiv Home</span>
+          <Link to="/" className="flex items-center gap-2" aria-label="AquaaLiv Home">
+            <img src={logo} alt="AquaaLiv" className="h-8 w-auto object-contain" />
+            <span className="hidden sm:inline font-semibold text-slate-800 text-lg">AquaaLiv</span>
           </Link>
-          <Link to="/" className="font-semibold text-slate-800 text-lg">AquaaLiv</Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
