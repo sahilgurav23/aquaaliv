@@ -1,7 +1,30 @@
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import ContactForm from '../components/ContactForm'
+import { DEFAULT_SITE_CONTACT, getSiteContact } from '../lib/siteContact'
 
 export default function Contact() {
+  const [contact, setContact] = useState(DEFAULT_SITE_CONTACT)
+
+  useEffect(() => {
+    let alive = true
+
+    ;(async () => {
+      try {
+        const data = await getSiteContact()
+        if (!alive) return
+        setContact(data)
+      } catch {
+        if (!alive) return
+        setContact(DEFAULT_SITE_CONTACT)
+      }
+    })()
+
+    return () => {
+      alive = false
+    }
+  }, [])
+
   return (
     <>
       <Helmet>
@@ -26,10 +49,10 @@ export default function Contact() {
             <div className="card">
               <h3 className="text-lg font-semibold text-slate-900">Contact Details</h3>
               <ul className="mt-3 space-y-2 text-slate-700 text-sm">
-                <li>Phone: <a className="hover:underline" href="tel:+919689102762">+91 96891 42762</a></li>
-                <li>Email: <a className="hover:underline" href="mailto:aquaaliv@gmail.com">aquaaliv@gmail.com</a></li>
-                <li>Address: AquaaLiv, Office No 02, Bhakti-Desai Heights, Near Bank of Maharashtra, Akurdi - 035 </li>
-                <li>Hours: Mon–Sat, 9:00 AM – 7:00 PM</li>
+                <li>Phone: <a className="hover:underline" href={`tel:${contact.phoneTel}`}>{contact.phoneDisplay}</a></li>
+                <li>Email: <a className="hover:underline" href={`mailto:${contact.email}`}>{contact.email}</a></li>
+                <li>Address: {contact.address}</li>
+                <li>Hours: {contact.hours}</li>
               </ul>
             </div>
             <div className="card">

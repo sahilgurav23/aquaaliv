@@ -33,6 +33,7 @@ export default function Navbar() {
               {n.label}
             </NavLink>
           ))}
+          <Link to="/login" className="btn-secondary text-sm">Login</Link>
           <Link to="/contact" className="btn-primary text-sm">Book Service</Link>
         </nav>
 
@@ -64,6 +65,7 @@ export default function Navbar() {
                 {n.label}
               </NavLink>
             ))}
+            <Link to="/login" onClick={() => setOpen(false)} className="btn-secondary w-full">Login</Link>
             <Link to="/contact" onClick={() => setOpen(false)} className="btn-primary text-sm">Book Service</Link>
           </div>
         </div>

@@ -1,6 +1,29 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { DEFAULT_SITE_CONTACT, getSiteContact } from '../lib/siteContact'
 
 export default function Footer() {
+  const [contact, setContact] = useState(DEFAULT_SITE_CONTACT)
+
+  useEffect(() => {
+    let alive = true
+
+    ;(async () => {
+      try {
+        const data = await getSiteContact()
+        if (!alive) return
+        setContact(data)
+      } catch {
+        if (!alive) return
+        setContact(DEFAULT_SITE_CONTACT)
+      }
+    })()
+
+    return () => {
+      alive = false
+    }
+  }, [])
+
   return (
     <footer className="mt-16 border-t border-slate-200 bg-slate-50">
       <div className="container-p py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -25,9 +48,9 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-slate-900 mb-3">Contact</h4>
           <ul className="space-y-2 text-sm text-slate-700">
-            <li>Phone: <a href="tel:+919689102762" className="hover:underline">+91 96891 02762</a></li>
-            <li>Email: <a href="mailto:aquaaliv@gmail.com" className="hover:underline">aquaaliv@gmail.com</a></li>
-            <li>Address: AquaaLiv, Office No 02, Bhakti-Desai Heights, Near Bank of Maharashtra, Akurdi - 035</li>
+            <li>Phone: <a href={`tel:${contact.phoneTel}`} className="hover:underline">{contact.phoneDisplay}</a></li>
+            <li>Email: <a href={`mailto:${contact.email}`} className="hover:underline">{contact.email}</a></li>
+            <li>Address: {contact.address}</li>
           </ul>
         </div>
         <div>
