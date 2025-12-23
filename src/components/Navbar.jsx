@@ -17,9 +17,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
       <div className="container-p h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-2" aria-label="AquaaLiv Home">
-            <img src={logo} alt="AquaaLiv" className="h-8 w-auto object-contain" />
-            <span className="hidden sm:inline font-semibold text-slate-800 text-lg">AquaaLiv</span>
+          <Link to="/" className="flex items-center" aria-label="AquaaLiv Home">
+            <img src={logo} alt="AquaaLiv" className="h-10 sm:h-11 w-auto object-contain" />
           </Link>
         </div>
 
