@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>AquaaLiv | Pure Water. Pure Life.</title>
+        <title>AquaaLiv | Your One-Stop Solution for RO Service and Safe Drinking Water</title>
         <meta name="description" content="The Choice of Purity. Pure, refreshing, and naturally sourced. Every drop delivers the essence of freshness. For those who chooses nature's finest. Experience the purity, feel the difference" />
       </Helmet>
       <HeroSection />
