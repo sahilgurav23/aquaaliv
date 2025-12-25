@@ -1,8 +1,8 @@
-export default function PricingCard({ name, price, features = [], highlight = false }) {
+export default function PricingCard({ name, features = [], highlight = false }) {
   return (
     <div className={`card h-full ${highlight ? 'ring-2 ring-brand-blue' : ''}`}>
       <p className="text-sm font-semibold text-slate-900">{name}</p>
-      <p className="mt-1 text-3xl font-extrabold text-slate-900">₹ {price.toLocaleString('en-IN')}</p>
+      {/* <p className="mt-1 text-3xl font-extrabold text-slate-900">₹ {price.toLocaleString('en-IN')}</p> */}
       {features?.length > 0 && (
         <ul className="mt-3 space-y-1 text-sm text-slate-600">
           {features.map((f, i) => (
