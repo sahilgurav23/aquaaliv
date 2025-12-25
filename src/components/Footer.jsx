@@ -28,17 +28,13 @@ export default function Footer() {
   return (
     <footer className="mt-16 border-t border-slate-200 bg-slate-50">
       <div className="container-p py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        
+
         {/* Logo & About */}
         <div>
-          <Link to="/" aria-label="AquaaLiv Home" className="inline-flex items-center mb-4">
-            <img
-              src={logo}
-              alt="AquaaLiv"
-              className="h-14 w-auto object-contain"
-            />
+          <Link to="/" className="inline-flex items-center mb-4">
+            <img src={logo} alt="AquaaLiv" className="h-14 w-auto" />
           </Link>
-          <p className="text-slate-600 text-sm">
+          <p className="text-slate-600 text-sm leading-relaxed">
             Pure, healthy, and great-tasting water solutions for homes and
             businesses. Installation, repair, AMC, and expert guidance.
           </p>
@@ -58,88 +54,85 @@ export default function Footer() {
               <li key={item.label}>
                 <Link
                   to={item.to}
-                  className="block rounded-md px-2 py-1 hover:bg-slate-100 transition"
+                  className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-slate-100 transition"
                 >
-                  {item.label}
+                  <span className="text-brand-blue font-bold">{">"}</span>
+                  <span>{item.label}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Contact With Icons */}
+        {/* Contact (Professional & Clean) */}
         <div>
           <h4 className="font-semibold text-slate-900 mb-3">Contact</h4>
-          <ul className="space-y-3 text-sm text-slate-700">
+          <ul className="space-y-3 text-sm text-slate-600">
 
             {/* Phone */}
-            <li className="flex items-start gap-3">
+            <li className="flex items-center gap-3">
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-brand-blue mt-0.5"
+                className="text-slate-400"
               >
                 <path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72l.5 3a2 2 0 0 1-1.09 2.18l-1.27.64a16 16 0 0 0 6.29 6.29l.64-1.27a2 2 0 0 1 2.18-1.09l3 .5a2 2 0 0 1 1.72 2z" />
               </svg>
-              <span>
-                <a
-                  href={`tel:${contact.phoneTel}`}
-                  className="hover:underline"
-                >
-                  {contact.phoneDisplay}
-                </a>
-              </span>
+              <a
+                href={`tel:${contact.phoneTel}`}
+                className="hover:text-brand-blue transition"
+              >
+                {contact.phoneDisplay}
+              </a>
             </li>
 
             {/* Email */}
-            <li className="flex items-start gap-3">
+            <li className="flex items-center gap-3">
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-brand-blue mt-0.5"
+                className="text-slate-400"
               >
                 <path d="M4 4h16v16H4z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
-              <span>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="hover:underline"
-                >
-                  {contact.email}
-                </a>
-              </span>
+              <a
+                href={`mailto:${contact.email}`}
+                className="hover:text-brand-blue transition"
+              >
+                {contact.email}
+              </a>
             </li>
 
             {/* Address */}
             <li className="flex items-start gap-3">
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-brand-blue mt-0.5"
+                className="text-slate-400 mt-0.5"
               >
                 <path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span>{contact.address}</span>
+              <span className="leading-relaxed">{contact.address}</span>
             </li>
 
           </ul>
@@ -160,10 +153,9 @@ export default function Footer() {
 
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom */}
       <div className="border-t border-slate-200">
-        <div className="container-p py-4 flex flex-col items-center gap-2 text-xs text-slate-500">
-          <img src={logo} alt="AquaaLiv" className="h-8 w-auto" />
+        <div className="container-p py-4 text-center text-xs text-slate-500">
           © {new Date().getFullYear()} AquaaLiv. All rights reserved.
         </div>
       </div>
