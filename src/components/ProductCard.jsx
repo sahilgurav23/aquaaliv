@@ -1,11 +1,25 @@
 import { Link } from 'react-router-dom'
 
-export default function ProductCard({ id, name, type, capacity, price, features = [], onEnquire, image }) {
+export default function ProductCard({ id, name, type, capacity, price, features = [], onEnquire, image, linkToDetail = true }) {
   return (
-    <div className="card h-full flex flex-col">
+    <div className="card h-full flex flex-col transition hover:shadow-md hover:-translate-y-0.5">
       {image && (
-        <div className="mb-4 overflow-hidden rounded-xl aspect-[4/3] bg-slate-100">
-          <Link to={`/products/${id}`} aria-label={`${name} details`}>
+        <div className="mb-4 overflow-hidden rounded-xl aspect-[4/3] bg-slate-50 grid place-items-center p-4">
+          {linkToDetail && id ? (
+            <Link to={`/products/${id}`} aria-label={`${name} details`} className="block h-full w-full">
+              <img
+                src={image}
+                alt={`${name} purifier image`}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = `https://placehold.co/600x400?text=${encodeURIComponent(name)}&font=inter`
+                }}
+                className="h-full w-full object-contain"
+              />
+            </Link>
+          ) : (
             <img
               src={image}
               alt={`${name} purifier image`}
@@ -15,18 +29,26 @@ export default function ProductCard({ id, name, type, capacity, price, features 
                 e.currentTarget.onerror = null
                 e.currentTarget.src = `https://placehold.co/600x400?text=${encodeURIComponent(name)}&font=inter`
               }}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
-          </Link>
+          )}
         </div>
       )}
       <div className="flex-1">
         <p className="text-xs uppercase tracking-wide text-slate-500">{type}</p>
         <h3 className="mt-1 text-lg font-semibold text-slate-900">
-          <Link to={`/products/${id}`} className="hover:text-brand-blue transition">{name}</Link>
+          {linkToDetail && id ? (
+            <Link to={`/products/${id}`} className="hover:text-brand-blue transition">{name}</Link>
+          ) : (
+            <span>{name}</span>
+          )}
         </h3>
-        <p className="mt-1 text-sm text-slate-600">Capacity: {capacity}</p>
-        <p className="mt-3 text-xl font-bold text-slate-900">₹ {price.toLocaleString('en-IN')}</p>
+        {capacity && (
+          <p className="mt-1 text-sm text-slate-600">Capacity: {capacity}</p>
+        )}
+        {typeof price === 'number' && !Number.isNaN(price) && (
+          <p className="mt-3 text-xl font-bold text-slate-900">₹ {price.toLocaleString('en-IN')}</p>
+        )}
         {features?.length > 0 && (
           <ul className="mt-3 space-y-1 text-sm text-slate-600">
             {features.slice(0, 4).map((f, i) => (

@@ -1,49 +1,41 @@
 import { Helmet } from 'react-helmet-async'
-import { useMemo, useState } from 'react'
 import ProductCard from '../components/ProductCard'
-import { products } from '../data/products'
-
-const categories = ['All', 'Home RO', 'Commercial RO', 'Under-sink RO', 'UV / UF']
+import { productSections } from '../data/productSections'
 
 export default function Products() {
-  const [active, setActive] = useState('All')
-  const filtered = useMemo(() => {
-    if (active === 'All') return products
-    return products.filter((p) => p.type === active)
-  }, [active])
-
   return (
     <>
       <Helmet>
         <title>Products | AquaaLiv</title>
-        <meta name="description" content="Explore RO, UV/UF, under-sink, and commercial water purifiers by AquaaLiv with key features, capacity, and pricing." />
+        <meta name="description" content="Premium water purifier brands and systems by AquaaLiv. Explore curated categories including Home RO, Under-sink, Commercial & Industrial RO, UV plants, water softeners, dispensers, and treatment plants." />
       </Helmet>
-      <section className="container-p py-12 sm:py-16">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-slate-900">Our Products</h1>
-          <p className="mt-2 text-slate-600">Advanced purification for every need</p>
+      {/* Intro heading section */}
+      <section className="container-p pt-12 sm:pt-16 pb-6">
+        <div className="text-center max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Premium Water Purifier Brands</h1>
+          <p className="mt-3 text-slate-600">Explore our curated collection of trusted water purification solutions, organized by categories for easy discovery.</p>
         </div>
-
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
-          {categories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={`rounded-full border px-4 py-2 text-sm transition ${
-                active === c ? 'border-brand-blue bg-sky-50 text-brand-blue' : 'border-slate-200 text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((p) => (
-            <ProductCard key={p.id} {...p} onEnquire={() => (window.location.href = '/contact')} />
+        <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+          {productSections.map((s) => (
+            <a key={s.key} href={`#${s.key}`} className="rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">{s.title}</a>
           ))}
         </div>
       </section>
+
+      {/* Sections */}
+      {productSections.map((section) => (
+        <section key={section.key} id={section.key} className="container-p py-10 sm:py-12">
+          <div className="mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">{section.title}</h2>
+            {section.subtitle && <p className="mt-2 text-slate-600">{section.subtitle}</p>}
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {section.items.map((p, idx) => (
+              <ProductCard key={(p.id || section.key) + '-' + idx} {...p} onEnquire={() => (window.location.href = '/contact')} />
+            ))}
+          </div>
+        </section>
+      ))}
     </>
   )
 }

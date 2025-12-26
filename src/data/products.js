@@ -1,3 +1,9 @@
+import img1 from '../assets/produts/1.webp'
+import img2 from '../assets/produts/2.webp'
+import img3 from '../assets/produts/3.webp'
+import img4 from '../assets/produts/4.jpg'
+import img5 from '../assets/produts/5.webp'
+
 export const products = [
   {
     id: 'home-ro-1',
@@ -6,7 +12,7 @@ export const products = [
     capacity: '8 L',
     price: 13999,
     features: ['7-stage purification', 'Mineral guard', 'Auto shut-off', 'Wall/Counter mount'],
-    image: 'https://picsum.photos/seed/aqua-home-8l/600/400',
+    image: img1,
   },
   {
     id: 'home-ro-2',
@@ -15,7 +21,7 @@ export const products = [
     capacity: '10 L',
     price: 16999,
     features: ['RO + UV + UF', 'Copper infusion', 'TDS up to 2000 ppm'],
-    image: 'https://picsum.photos/seed/aqua-home-10l/600/400',
+    image: img2,
   },
   {
     id: 'under-sink-1',
@@ -24,7 +30,7 @@ export const products = [
     capacity: '12 L',
     price: 21999,
     features: ['Compact design', 'High flow', 'Food-grade tank'],
-    image: 'https://picsum.photos/seed/aqua-under-sink-12l/600/400',
+    image: img3,
   },
   {
     id: 'commercial-ro-1',
@@ -33,7 +39,7 @@ export const products = [
     capacity: '25 LPH',
     price: 48999,
     features: ['Heavy-duty pump', 'Stainless frame', 'Low maintenance'],
-    image: 'https://picsum.photos/seed/aqua-commercial-25lph/600/400',
+    image: img5,
   },
   {
     id: 'uv-uf-1',
@@ -42,6 +48,6 @@ export const products = [
     capacity: 'No storage',
     price: 9999,
     features: ['Chemical-free', 'Instant purification', 'Ideal for low TDS'],
-    image: 'https://picsum.photos/seed/aqua-uv-uf/600/400',
+    image: img4,
   },
 ]
