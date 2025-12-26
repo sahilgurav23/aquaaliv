@@ -14,6 +14,7 @@ import img13 from '../assets/produts/13.jpg'
 import img14 from '../assets/produts/14.png'
 import img15 from '../assets/produts/15.webp'
 import img16 from '../assets/produts/16.jpg'
+import img17 from '../assets/produts/17.jpg'
 import img18 from '../assets/produts/18.avif'
 import img19 from '../assets/produts/19.webp'
 
@@ -154,7 +155,7 @@ export const productSections = [
         name: 'Home Appliances',
         type: 'Appliances',
         features: ['Smart & energy efficient', 'Durable', 'Modern living solutions'],
-        image: img14,
+        image: img15,
       },
     ],
   },
@@ -167,13 +168,13 @@ export const productSections = [
         name: 'WTP Plant',
         type: 'WTP',
         features: ['Large-scale purification', 'Continuous operation', 'Industrial & municipal use', 'Safe drinking water'],
-        image: img15,
+        image: img16,
       },
       {
         name: 'STP Plant',
         type: 'STP',
         features: ['Effluent treatment', 'Eco-friendly', 'Sustainable wastewater management'],
-        image: img16,
+        image: img17,
       },
       {
         name: 'Turnkey Water Treatment Project',
