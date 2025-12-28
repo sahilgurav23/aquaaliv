@@ -26,7 +26,7 @@ export default function Admin() {
   const [address, setAddress] = useState(DEFAULT_SITE_CONTACT.address)
   const [hours, setHours] = useState(DEFAULT_SITE_CONTACT.hours)
 
-  const disabled = useMemo(() => saving || !firebaseConfigured, [saving, firebaseConfigured])
+  const disabled = useMemo(() => saving || !firebaseConfigured, [saving])
 
   useEffect(() => {
     let alive = true
@@ -49,8 +49,9 @@ export default function Admin() {
         if (!alive) return
         setError(e?.message || 'Failed to load details')
       } finally {
-        if (!alive) return
-        setLoading(false)
+        if (alive) {
+          setLoading(false)
+        }
       }
     })()
 

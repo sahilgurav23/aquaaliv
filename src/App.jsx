@@ -17,6 +17,9 @@ const Contact = lazy(() => import('./pages/Contact'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const Login = lazy(() => import('./pages/Login'))
 const Admin = lazy(() => import('./pages/Admin'))
+const AddReview = lazy(() => import('./pages/AddReview'))
+const Reviews = lazy(() => import('./pages/Reviews'))
+const ReviewAdmin = lazy(() => import('./pages/ReviewAdmin'))
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<RequireDemoAuth><Admin /></RequireDemoAuth>} />
+            <Route path="/add-review" element={<AddReview />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/review-admin" element={<RequireDemoAuth><ReviewAdmin /></RequireDemoAuth>} />
           </Routes>
         </Suspense>
       </main>

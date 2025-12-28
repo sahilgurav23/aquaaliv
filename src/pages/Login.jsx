@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 
-const HARDCODED_USERNAME = 'admin'
+const ADMIN_USERNAME = 'admin'
+const REVIEW_USERNAME = 'Review'
 const HARDCODED_PASSWORD = 'AquaaLiv@123'
 
 export default function Login() {
@@ -18,8 +19,11 @@ export default function Login() {
 
     const u = username.trim()
     const p = password.trim()
-    const ok = u === HARDCODED_USERNAME && p === HARDCODED_PASSWORD
-    if (!ok) {
+
+    const isAdmin = u === ADMIN_USERNAME && p === HARDCODED_PASSWORD
+    const isReviewUser = u === REVIEW_USERNAME && p === HARDCODED_PASSWORD
+
+    if (!isAdmin && !isReviewUser) {
       setSuccess(false)
       setError('Invalid username or password')
       return
@@ -27,7 +31,16 @@ export default function Login() {
 
     setSuccess(true)
     window.sessionStorage.setItem('aquaaliv_demo_auth', 'true')
-    navigate('/admin')
+    window.sessionStorage.setItem(
+      'aquaaliv_role',
+      isReviewUser ? 'review' : 'admin'
+    )
+
+    if (isReviewUser) {
+      navigate('/review-admin')
+    } else {
+      navigate('/admin')
+    }
   }
 
   return (
@@ -44,7 +57,8 @@ export default function Login() {
             <p className="mt-2 text-slate-600">Sign in to continue</p>
             <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-left text-sm text-slate-700">
               <div className="font-medium text-slate-900">Demo credentials</div>
-              <div className="mt-1">Username: <span className="font-mono">admin</span></div>
+              <div className="mt-1">Admin Username: <span className="font-mono">admin</span></div>
+              <div>Review Username: <span className="font-mono">Review</span></div>
               <div>Password: <span className="font-mono">AquaaLiv@123</span></div>
             </div>
           </div>

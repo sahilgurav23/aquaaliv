@@ -134,7 +134,9 @@
 
 
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 import HeroSection from "../components/HeroSection";
 import ServiceCard from "../components/ServiceCard";
@@ -144,10 +146,52 @@ import Achievements from "../components/Achievements";
 
 import { services } from "../data/services";
 import { products } from "../data/products";
-import { testimonials } from "../data/testimonials";
+import { firebaseConfigured, getDb } from "../lib/firebase";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    if (!firebaseConfigured) {
+      return;
+    }
+
+    const db = getDb();
+    if (!db) {
+      return;
+    }
+
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const q = query(
+          collection(db, "reviews"),
+          orderBy("createdAt", "desc")
+        );
+        const snap = await getDocs(q);
+        if (cancelled) return;
+        const items = snap.docs
+          .map((d) => ({
+            id: d.id,
+            ...d.data(),
+          }))
+          .filter((item) => item.permission === true || item.permission === "true");
+        setReviews(items);
+      } catch {
+        if (!cancelled) {
+          setReviews([]);
+        }
+      }
+    }
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <>
@@ -338,11 +382,26 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.id} {...t} />
-          ))}
-        </div>
+        {reviews.length > 0 ? (
+          <>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {reviews.slice(0, 3).map((t) => (
+                <TestimonialCard key={t.id} {...t} />
+              ))}
+            </div>
+            {reviews.length > 3 && (
+              <div className="mt-8 text-center">
+                <Link to="/reviews" className="btn-secondary">
+                  View More
+                </Link>
+              </div>
+            )}
+          </>
+        ) : (
+          <p className="text-center text-slate-600">
+            No reviews yet. Be the first to share your experience.
+          </p>
+        )}
       </section>
     </>
   );
