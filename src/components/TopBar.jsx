@@ -80,18 +80,20 @@
 //     </div>
 //   );
 // }
+
+
 export default function TopBar() {
   return (
     <div className="bg-[#001f3f] text-white text-xs sm:text-sm">
       <div className="container-p flex items-center justify-center sm:justify-between h-8 sm:h-10">
 
-        {/* Phone + Email (ALWAYS visible) */}
+        {/* Phone + Email */}
         <div className="flex items-center gap-4 sm:gap-6">
 
           {/* Phone */}
           <a
             href="tel:+919689142762"
-            className="flex items-center gap-1.5 hover:text-sky-300 transition"
+            className="flex items-center gap-1.5 text-white hover:text-white transition"
           >
             <svg
               width="14"
@@ -105,13 +107,13 @@ export default function TopBar() {
             >
               <path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72l.5 3a2 2 0 0 1-1.09 2.18l-1.27.64a16 16 0 0 0 6.29 6.29l.64-1.27a2 2 0 0 1 2.18-1.09l3 .5a2 2 0 0 1 1.72 2z" />
             </svg>
-            <span>+91 9689142762</span>
+            <span className="text-white">+91 9689142762</span>
           </a>
 
           {/* Email */}
           <a
             href="mailto:aquaaliv.as@gmail.com"
-            className="flex items-center gap-1.5 hover:text-sky-300 transition"
+            className="flex items-center gap-1.5 text-white hover:text-white transition"
           >
             <svg
               width="14"
@@ -126,12 +128,14 @@ export default function TopBar() {
               <rect x="2" y="4" width="20" height="16" rx="2" />
               <path d="m22 6-10 7L2 6" />
             </svg>
-            <span>aquaaliv.as@gmail.com</span>
+            <span className="text-white">
+              aquaaliv.as@gmail.com
+            </span>
           </a>
 
         </div>
 
-        {/* Location (DESKTOP ONLY) */}
+        {/* Location – Desktop only */}
         <div className="hidden sm:flex items-center gap-1.5 text-white/90">
           <svg
             width="14"
