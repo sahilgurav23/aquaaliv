@@ -97,6 +97,7 @@
 // }
 
 
+
 import { Link } from "react-router-dom";
 
 export default function ProductCard({
@@ -178,12 +179,24 @@ export default function ProductCard({
           </p>
         )}
 
+        {/* ✅ FEATURES WITH GREEN TICK */}
         {features?.length > 0 && (
-          <ul className="mt-3 space-y-1 text-sm text-slate-600">
+          <ul className="mt-3 space-y-2 text-sm text-slate-600">
             {features.slice(0, 4).map((f, i) => (
-              <li key={i} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-                {f}
+              <li key={i} className="flex items-start gap-2">
+                {/* GREEN TICK ICON */}
+                <svg
+                  className="w-4 h-4 text-green-500 shrink-0 mt-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{f}</span>
               </li>
             ))}
           </ul>
