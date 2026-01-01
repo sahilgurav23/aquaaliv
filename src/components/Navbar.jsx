@@ -33,7 +33,7 @@ export default function Navbar() {
               {n.label}
             </NavLink>
           ))}
-          <Link to="/login" className="btn-secondary text-sm">Login</Link>
+          {/* <Link to="/login" className="btn-secondary text-sm">Login</Link> */}
           <Link to="/contact" className="btn-primary text-sm">Book Service</Link>
         </nav>
 
