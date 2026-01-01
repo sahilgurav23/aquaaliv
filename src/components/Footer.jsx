@@ -1,8 +1,11 @@
 
+
+
 // import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 // import { DEFAULT_SITE_CONTACT, getSiteContact } from "../lib/siteContact";
-// import footerLogo from "../assets/second_logo.jpeg";
+// // import footerLogo from "../assets/second_logo.jpeg";
+// import footerLogo from "../assets/second.png";
 
 // export default function Footer() {
 //   const [contact, setContact] = useState(DEFAULT_SITE_CONTACT);
@@ -30,7 +33,7 @@
 //     <footer className="mt-16 bg-[#001f3f] text-white">
 //       <div className="container-p py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-//         {/* Logo & About */}
+//         {/* ================= Logo & About ================= */}
 //         <div>
 //           <Link to="/" className="inline-flex items-center mb-4">
 //             <img
@@ -45,7 +48,7 @@
 //           </p>
 //         </div>
 
-//         {/* Quick Links */}
+//         {/* ================= Quick Links ================= */}
 //         <div>
 //           <h4 className="font-semibold text-white mb-3">Quick Links</h4>
 //           <ul className="space-y-2 text-sm">
@@ -59,7 +62,7 @@
 //               <li key={item.label}>
 //                 <Link
 //                   to={item.to}
-//                   className="block px-2 py-1 rounded-md hover:bg-white/10 transition"
+//                   className="block px-2 py-1 rounded-md text-white hover:text-white hover:bg-white/10 transition"
 //                 >
 //                   {item.label}
 //                 </Link>
@@ -68,16 +71,14 @@
 //           </ul>
 //         </div>
 
-//         {/* Contact */}
+//         {/* ================= Contact ================= */}
 //         <div>
 //           <h4 className="font-semibold text-white mb-3">Contact</h4>
 
-//           {/* 🔥 CHANGED: space-y-5 */}
 //           <ul className="space-y-5 text-sm">
 
 //             {/* Phone */}
 //             <li className="flex items-start gap-3">
-//               {/* 🔥 CHANGED: w-5 h-5 + shrink-0 */}
 //               <svg
 //                 className="w-5 h-5 text-sky-300 shrink-0"
 //                 viewBox="0 0 24 24"
@@ -131,7 +132,7 @@
 //           </ul>
 //         </div>
 
-//         {/* CTA */}
+//         {/* ================= CTA ================= */}
 //         <div>
 //           <h4 className="font-semibold text-white mb-3">Get Started</h4>
 //           <div className="flex flex-col gap-3">
@@ -152,7 +153,7 @@
 
 //       </div>
 
-//       {/* Bottom */}
+//       {/* ================= Bottom ================= */}
 //       <div className="border-t border-white/20">
 //         <div className="container-p py-4 text-center text-xs text-slate-300">
 //           © {new Date().getFullYear()} AquaaLiv. All rights reserved.
@@ -163,10 +164,11 @@
 // }
 
 
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DEFAULT_SITE_CONTACT, getSiteContact } from "../lib/siteContact";
-import footerLogo from "../assets/second_logo.jpeg";
+import footerLogo from "../assets/second.png";
 
 export default function Footer() {
   const [contact, setContact] = useState(DEFAULT_SITE_CONTACT);
@@ -200,7 +202,7 @@ export default function Footer() {
             <img
               src={footerLogo}
               alt="AquaaLiv"
-              className="h-9 w-auto opacity-90"
+              className="h-14 sm:h-16 w-auto opacity-100"
             />
           </Link>
           <p className="text-slate-200 text-sm leading-relaxed">
