@@ -198,7 +198,7 @@ export default function Home() {
       {/* ================= SEO ================= */}
       <Helmet>
         <title>
-          AquaaLiv | Your One-Stop Solution for RO Service and Safe Drinking Water
+          AquaaLiv | Smart & Reliable Ro Water Solutions
         </title>
         <meta
           name="description"
