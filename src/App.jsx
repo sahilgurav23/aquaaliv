@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef } from 'react'
+import React, { Suspense, lazy, useEffect, useRef } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -21,6 +21,46 @@ const Admin = lazy(() => import('./pages/Admin'))
 const AddReview = lazy(() => import('./pages/AddReview'))
 const Reviews = lazy(() => import('./pages/Reviews'))
 const ReviewAdmin = lazy(() => import('./pages/ReviewAdmin'))
+
+class AppErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  componentDidCatch() {}
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="container-p py-16">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Something went wrong</h1>
+          <p className="mt-3 text-slate-600">
+            The page failed to load correctly. Please try refreshing the page or return to the home page.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => window.location.reload()}
+            >
+              Refresh page
+            </button>
+            <a href="/" className="btn-primary">
+              Go to Home
+            </a>
+          </div>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
 
 function NotFound() {
   return (
@@ -223,34 +263,36 @@ function GlobalWaterOverlay() {
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden">
-      <GlobalWaterOverlay />
-      <ScrollToTop />
-      <TopBar />
-      <Navbar />
-      <main className="flex-1">
-        <Suspense fallback={<div className="container-p py-16">Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<HomeWithCTA />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<RequireDemoAuth><Admin /></RequireDemoAuth>} />
-            <Route path="/add-review" element={<AddReview />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/review-admin" element={<RequireDemoAuth><ReviewAdmin /></RequireDemoAuth>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <Footer />
-      <WhatsAppFloatingButton phoneNumber="+919689142762" />
-      <CallFloatingButton phoneNumber="+919689102762" />
-    </div>
+    <AppErrorBoundary>
+      <div className="min-h-screen flex flex-col bg-white relative overflow-hidden">
+        <GlobalWaterOverlay />
+        <ScrollToTop />
+        <TopBar />
+        <Navbar />
+        <main className="flex-1">
+          <Suspense fallback={<div className="container-p py-16">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<HomeWithCTA />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/admin" element={<RequireDemoAuth><Admin /></RequireDemoAuth>} />
+              <Route path="/add-review" element={<AddReview />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/review-admin" element={<RequireDemoAuth><ReviewAdmin /></RequireDemoAuth>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+        <WhatsAppFloatingButton phoneNumber="+919689142762" />
+        <CallFloatingButton phoneNumber="+919689102762" />
+      </div>
+    </AppErrorBoundary>
   )
 }
 
