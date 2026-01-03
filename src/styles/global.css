@@ -5,6 +5,7 @@
   --brand-blue: #0ea5e9;
   --brand-green: #10b981;
   --brand-dark: #0f172a;
+  --water-drop-max-opacity: 0.7;
 }
 
 html, body, #root {
@@ -86,4 +87,67 @@ html, body, #root {
     transition: box-shadow 150ms ease;
   }
   .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .water-drops-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .water-drop {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(56,189,248,0.65));
+    box-shadow: 0 0 0.6vw rgba(56,189,248,0.55);
+    opacity: 0;
+    transform: translate3d(0, -12vh, 0) scale(0.9);
+    will-change: transform, opacity;
+    animation-name: water-drop-fall;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes water-drop-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12vh, 0) scale(0.9);
+  }
+  12% {
+    opacity: var(--water-drop-max-opacity, 1);
+  }
+  80% {
+    opacity: var(--water-drop-max-opacity, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 112vh, 0) scale(1.05);
+  }
+}
+
+@keyframes water-drop-ripple {
+  0% {
+    opacity: var(--water-drop-max-opacity, 1);
+    transform: translate3d(-50%, 0, 0) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, 0, 0) scale(1.6);
+  }
+}
+
+@layer components {
+  .water-drop-ripple {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 4vw;
+    height: 4vw;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 9999px;
+    border: 0.14vw solid rgba(56,189,248,0.45);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: water-drop-ripple 900ms ease-out forwards;
+  }
 }

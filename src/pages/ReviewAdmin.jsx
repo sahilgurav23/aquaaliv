@@ -32,17 +32,6 @@ function formatDate(value) {
   }
 }
 
-function getDateKey(value) {
-  if (!value) return "";
-  try {
-    const d =
-      typeof value.toDate === "function" ? value.toDate() : new Date(value);
-    return d.toISOString().slice(0, 10);
-  } catch {
-    return "";
-  }
-}
-
 export default function ReviewAdmin() {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);

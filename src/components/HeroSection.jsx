@@ -92,9 +92,160 @@ import img3 from "../assets/main_slid_image/main_image4.png";
 
 const SLIDE_DELAY = 4500;
 
+const WATER_DROP_DEFAULT_CONFIG = {
+  dropFrequency: 0.4,
+  minDropSizeVw: 0.6,
+  maxDropSizeVw: 1.2,
+  minDurationMs: 2200,
+  maxDurationMs: 4200,
+  color: "rgba(56,189,248,0.65)",
+};
+
+/**
+ * WaterDropsOverlay renders animated water drops within the hero section.
+ *
+ * It relies on lightweight DOM nodes plus CSS keyframes for the motion, while
+ * requestAnimationFrame is used only to schedule new drops based on a
+ * configurable frequency. This keeps updates efficient and GPU-accelerated.
+ *
+ * The overlay is fully contained by its parent section and uses relative units
+ * (vw, vh, %) so that the visuals scale naturally across screen sizes.
+ * Graceful degradation is applied by skipping animation when reduced motion
+ * is requested or requestAnimationFrame is unavailable.
+ */
+function WaterDropsOverlay({ config, hovered }) {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (
+      typeof window === "undefined" ||
+      typeof window.requestAnimationFrame !== "function"
+    ) {
+      return;
+    }
+
+    const reducedMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      return;
+    }
+
+    const settings = {
+      dropFrequency:
+        config?.dropFrequency ?? WATER_DROP_DEFAULT_CONFIG.dropFrequency,
+      minDropSizeVw:
+        config?.minDropSizeVw ?? WATER_DROP_DEFAULT_CONFIG.minDropSizeVw,
+      maxDropSizeVw:
+        config?.maxDropSizeVw ?? WATER_DROP_DEFAULT_CONFIG.maxDropSizeVw,
+      minDurationMs:
+        config?.minDurationMs ?? WATER_DROP_DEFAULT_CONFIG.minDurationMs,
+      maxDurationMs:
+        config?.maxDurationMs ?? WATER_DROP_DEFAULT_CONFIG.maxDurationMs,
+      color: config?.color ?? WATER_DROP_DEFAULT_CONFIG.color,
+    };
+
+    let frameId;
+    let lastTime = performance.now();
+    let accumulator = 0;
+    let destroyed = false;
+
+    const hoverBoost = hovered ? 1.4 : 1;
+    const baseFrequency = Math.max(
+      settings.dropFrequency * hoverBoost,
+      0.05
+    );
+
+    /**
+     * createDrop injects a single drop element with randomized position,
+     * size, and animation duration. Each drop removes itself once its
+     * CSS animation completes to avoid leaking DOM nodes.
+     */
+    function createDrop() {
+      if (!container) return;
+
+      const drop = document.createElement("div");
+      drop.className = "water-drop";
+
+      const sizeVw =
+        settings.minDropSizeVw +
+        Math.random() *
+          (settings.maxDropSizeVw - settings.minDropSizeVw);
+      const leftPercent = Math.random() * 100;
+      const durationMs =
+        settings.minDurationMs +
+        Math.random() *
+          (settings.maxDurationMs - settings.minDurationMs);
+
+      drop.style.width = `${sizeVw}vw`;
+      drop.style.height = `${sizeVw * 1.6}vw`;
+      drop.style.left = `${leftPercent}%`;
+      drop.style.top = "-12vh";
+      drop.style.animationDuration = `${durationMs}ms`;
+      drop.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), ${settings.color})`;
+
+      if (hovered) {
+        drop.style.filter = "brightness(1.08)";
+      }
+
+      const handleAnimationEnd = () => {
+        drop.removeEventListener("animationend", handleAnimationEnd);
+        if (drop.parentElement === container) {
+          container.removeChild(drop);
+        }
+      };
+
+      drop.addEventListener("animationend", handleAnimationEnd);
+
+      container.appendChild(drop);
+    }
+
+    /**
+     * animationLoop converts requestAnimationFrame timestamps into discrete
+     * drop creation events based on the configured frequency. Work per frame
+     * is minimal and scales with the number of visible drops.
+     */
+    function animationLoop(now) {
+      if (destroyed) return;
+
+      const delta = now - lastTime;
+      lastTime = now;
+      accumulator += delta;
+
+      const intervalMs = 1000 / baseFrequency;
+
+      while (accumulator >= intervalMs) {
+        accumulator -= intervalMs;
+        createDrop();
+      }
+
+      frameId = window.requestAnimationFrame(animationLoop);
+    }
+
+    frameId = window.requestAnimationFrame(animationLoop);
+
+    return () => {
+      destroyed = true;
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+      if (container) {
+        container.innerHTML = "";
+      }
+    };
+  }, [config, hovered]);
+
+  return <div ref={containerRef} className="water-drops-overlay" />;
+}
+
 export default function HeroSection() {
   const images = [img1, img2, img3];
   const [active, setActive] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -106,7 +257,15 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50">
+    <section
+      className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <WaterDropsOverlay
+        config={WATER_DROP_DEFAULT_CONFIG}
+        hovered={isHovered}
+      />
       <div className="container-p py-16 sm:py-20 lg:py-24">
         <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white/95 border border-sky-100 rounded-[2rem] shadow-[0_26px_80px_rgba(15,23,42,0.20)] px-6 sm:px-10 py-10 lg:py-12">
 
