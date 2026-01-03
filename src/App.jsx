@@ -22,6 +22,22 @@ const AddReview = lazy(() => import('./pages/AddReview'))
 const Reviews = lazy(() => import('./pages/Reviews'))
 const ReviewAdmin = lazy(() => import('./pages/ReviewAdmin'))
 
+function NotFound() {
+  return (
+    <div className="container-p py-16">
+      <h1 className="text-3xl font-bold text-slate-900">Page not found</h1>
+      <p className="mt-3 text-slate-600">
+        The page you are looking for does not exist. You can continue browsing from the home page.
+      </p>
+      <div className="mt-6">
+        <a href="/" className="btn-primary">
+          Go to Home
+        </a>
+      </div>
+    </div>
+  )
+}
+
 const GLOBAL_WATER_CONFIG = {
   dropFrequency: 0.35,
   minDropSizeVw: 0.4,
@@ -227,6 +243,7 @@ function App() {
             <Route path="/add-review" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/review-admin" element={<RequireDemoAuth><ReviewAdmin /></RequireDemoAuth>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
